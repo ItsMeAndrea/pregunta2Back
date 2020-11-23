@@ -6,6 +6,7 @@ let port = process.env.PORT || 5000;
 dotenv.config();
 const usersRoute = require("./app/routes/usersRoute");
 const leaderboardRoute = require("./app/routes/leaderboardRoute");
+const multiplayerRoute = require("./app/routes/multiplayerRoute");
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(express.json());
 //ROUTES
 app.use("/api/v1", usersRoute);
 app.use("/api/v1", leaderboardRoute);
+app.use("/api/v1", multiplayerRoute);
 
 app.listen(port).on("listening", () => {
   console.log(`live from ${port}`);
