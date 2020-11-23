@@ -6,3 +6,5 @@ const router = express.Router();
 
 router.post("/multiplayer/addGame", createGame);
 router.get("/multiplayer/getGame", getGame);
+
+module.exports = router;
