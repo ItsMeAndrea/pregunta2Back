@@ -61,7 +61,8 @@ const createLeaderRushTable = () => {
 
 const createMultiPlayerTable = () => {
   const multiPlayerQuery = `CREATE TABLE IF NOT EXISTS multi_game
-  (game_id PRIMARY KEY, 
+  (game_id SERIAL PRIMARY KEY, 
+  game_code VARCHAR(100) NOT NULL,
   player_one VARCHAR(100),  
   player_two VARCHAR(100),
   questions_one float,

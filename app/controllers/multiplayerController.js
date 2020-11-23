@@ -4,7 +4,7 @@ const { isEmpty } = require("../helpers/validation");
 
 const createGame = async (req, res) => {
   const {
-    game_id,
+    game_code,
     player_one,
     player_two,
     questions_one,
@@ -17,9 +17,9 @@ const createGame = async (req, res) => {
   }
 
   const createGameQuery =
-    "INSERT INTO multi_game (game_id, player_one, player_two, questions_one, questions_two) VALUES($1,$2, $3, $4, $5) RETURNING *";
+    "INSERT INTO multi_game (game_code, player_one, player_two, questions_one, questions_two) VALUES($1,$2, $3, $4, $5) RETURNING *";
   const values = [
-    game_id,
+    game_code,
     player_one,
     player_two,
     questions_one,
@@ -39,12 +39,12 @@ const createGame = async (req, res) => {
 };
 
 const getGame = async (req, rs) => {
-  const { game_id } = req.body;
+  const { game_code } = req.body;
 
-  const getGameQuery = "SELECT * FROM multi_game WHERE game_id=$1";
+  const getGameQuery = "SELECT * FROM multi_game WHERE game_code=$1";
 
   try {
-    const { rows } = await dbQuery.query(getGameQuery, [game_id]);
+    const { rows } = await dbQuery.query(getGameQuery, [game_code]);
     const dbResponse = rows[0];
     if (!dbResponse) {
       errorMessage.error = "No hay informacion del juego";
