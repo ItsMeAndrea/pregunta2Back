@@ -11,7 +11,7 @@ const createGame = async (req, res) => {
     questions_two,
   } = req.body;
 
-  if (isEmpty(game_id)) {
+  if (isEmpty(game_code)) {
     errorMessage.error = "Hubo en error en la operacion";
     return res.status(status.bad).send(errorMessage);
   }
@@ -38,7 +38,7 @@ const createGame = async (req, res) => {
   }
 };
 
-const getGame = async (req, rs) => {
+const getGame = async (req, res) => {
   const { game_code } = req.body;
 
   const getGameQuery = "SELECT * FROM multi_game WHERE game_code=$1";
