@@ -2,11 +2,23 @@ const dbQuery = require("../db/dev/dbQuery");
 const { errorMessage, successMessage, status } = require("../helpers/status");
 
 const createGame = async (req, res) => {
-  const { player_one, player_two, questions_one, questions_two } = req.body;
+  const {
+    game_id,
+    player_one,
+    player_two,
+    questions_one,
+    questions_two,
+  } = req.body;
 
   const createGameQuery =
-    "INSERT INTO multi_game ( player_one, player_two, questions_one, questions_two) VALUES($1,$2, $3, $4) RETURNING *";
-  const values = [player_one, player_two, questions_one, questions_two];
+    "INSERT INTO multi_game (game_id, player_one, player_two, questions_one, questions_two) VALUES($1,$2, $3, $4, $5) RETURNING *";
+  const values = [
+    game_id,
+    player_one,
+    player_two,
+    questions_one,
+    questions_two,
+  ];
 
   try {
     const { rows } = await dbQuery.query(createGameQuery, values);

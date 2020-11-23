@@ -7,7 +7,7 @@
     "node": "12.18.3"
   },
   "scripts": {
-    "create-dev-tables": "babel-node ./app/db/dev/dbConnection createAllTables",
+    "create-dev-tables": "babel-node ./app/db/dev/dbConnection dropAllTables",
     "start": "nodemon --watch . --exec babel-node -- index",
     "setup": "npm-run-all -p start create-dev-tables"
   },
