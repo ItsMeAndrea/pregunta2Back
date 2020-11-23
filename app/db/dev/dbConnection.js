@@ -59,6 +59,27 @@ const createLeaderRushTable = () => {
     });
 };
 
+const createMultiPlayerTable = () => {
+  const multiPlayerQuery = `CREATE TABLE IF NOT EXISTS multi_game
+  (game_id SERIAL PRIMARY KEY, 
+  player_one VARCHAR(100) NOT NULL,  
+  player_two VARCHAR(100) NOT NULL
+  questions_one float NOT NULL
+  questions_two float NOT NULL
+  )`;
+
+  pool
+    .query(multiPlayerQuery)
+    .then((res) => {
+      console.log(res);
+      pool.end();
+    })
+    .catch((err) => {
+      console.log(err);
+      pool.end();
+    });
+};
+
 const dropUserTable = () => {
   const usersDropQuery = "DROP TABLE IF EXISTS users";
 
@@ -102,16 +123,32 @@ const dropLeaderRushTable = () => {
     });
 };
 
+const dropMultiPlayerTable = () => {
+  const multiPlayerQuery = "DROP TABLE IF EXISTS multi_game";
+  pool
+    .query(multiPlayerQuery)
+    .then((res) => {
+      console.log(res);
+      pool.end();
+    })
+    .catch((err) => {
+      console.log(err);
+      pool.end();
+    });
+};
+
 const createAllTables = () => {
   createUserTable();
   createLeaderNormalTable();
   createLeaderRushTable();
+  createMultiPlayerTable();
 };
 
 const dropAllTables = () => {
   dropUserTable();
   dropLeaderNormalTable();
   dropLeaderRushTable();
+  dropMultiPlayerTable();
 };
 pool.on("remove", () => {
   console.log("client removed");
