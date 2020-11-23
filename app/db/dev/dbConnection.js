@@ -62,10 +62,10 @@ const createLeaderRushTable = () => {
 const createMultiPlayerTable = () => {
   const multiPlayerQuery = `CREATE TABLE IF NOT EXISTS multi_game
   (game_id SERIAL PRIMARY KEY, 
-  player_one VARCHAR(100) NOT NULL,  
-  player_two VARCHAR(100) NOT NULL,
-  questions_one float NOT NULL,
-  questions_two float NOT NULL)`;
+  player_one VARCHAR(100),  
+  player_two VARCHAR(100),
+  questions_one float,
+  questions_two float)`;
 
   pool
     .query(multiPlayerQuery)
