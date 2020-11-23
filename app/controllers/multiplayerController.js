@@ -1,5 +1,6 @@
 const dbQuery = require("../db/dev/dbQuery");
 const { errorMessage, successMessage, status } = require("../helpers/status");
+const { isEmpty } = require("../helpers/validation");
 
 const createGame = async (req, res) => {
   const {
@@ -9,6 +10,11 @@ const createGame = async (req, res) => {
     questions_one,
     questions_two,
   } = req.body;
+
+  if (isEmpty(game_id)) {
+    errorMessage.error = "Hubo en error en la operacion";
+    return res.status(status.bad).send(errorMessage);
+  }
 
   const createGameQuery =
     "INSERT INTO multi_game (game_id, player_one, player_two, questions_one, questions_two) VALUES($1,$2, $3, $4, $5) RETURNING *";
