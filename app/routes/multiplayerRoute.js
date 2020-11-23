@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { createGame, getGame } = require("../controllers/leaderboardController");
+const { createGame, getGame } = require("../controllers/multiplayerController");
 
 const router = express.Router();
 
