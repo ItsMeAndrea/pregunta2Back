@@ -65,8 +65,7 @@ const createMultiPlayerTable = () => {
   player_one VARCHAR(100) NOT NULL,  
   player_two VARCHAR(100) NOT NULL
   questions_one float NOT NULL
-  questions_two float NOT NULL
-  )`;
+  questions_two float NOT NULL)`;
 
   pool
     .query(multiPlayerQuery)
