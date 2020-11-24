@@ -59,4 +59,8 @@ const getGame = async (req, res) => {
   }
 };
 
-module.exports = { createGame, getGame };
+const updateGame = async (req, res) => {
+  console.log(req, "updateGame");
+};
+
+module.exports = { createGame, getGame, updateGame };

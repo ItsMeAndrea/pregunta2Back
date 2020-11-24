@@ -1,10 +1,15 @@
 const express = require("express");
 
-const { createGame, getGame } = require("../controllers/multiplayerController");
+const {
+  createGame,
+  getGame,
+  updateGame,
+} = require("../controllers/multiplayerController");
 
 const router = express.Router();
 
 router.post("/multiplayer/addGame", createGame);
 router.get("/multiplayer/getGame", getGame);
+router.put("/multiplayr/updateGame", updateGame);
 
 module.exports = router;
