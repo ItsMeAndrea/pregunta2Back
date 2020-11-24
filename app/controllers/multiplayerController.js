@@ -122,7 +122,7 @@ const updateGame = async (req, res) => {
 };
 
 const getGameByUser = async (req, res) => {
-  const { username } = req.body;
+  const { username } = req.params;
   const gameByUserQuery =
     "SELECT * FROM multi_game WHERE player_one=$1 OR player_two=$1";
 
