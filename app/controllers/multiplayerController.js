@@ -60,7 +60,61 @@ const getGame = async (req, res) => {
 };
 
 const updateGame = async (req, res) => {
-  console.log(req, "updateGame");
+  const {
+    game_code,
+    player_one,
+    questions_one,
+    player_two,
+    questions_two,
+  } = req.body;
+  const findGameQuery = "SELECT * FROM multi_game WHERE game_code=$1";
+  if (player_one) {
+    const updateGameQuery =
+      "UPDATE multi_game SET player_one=$1, questions_one=$2 WHERE game_code=$3 RETURNING*";
+
+    try {
+      const { rows } = await dbQuery.query(findGameQuery, [game_code]);
+      const dbResponse = rows[0];
+      if (!dbResponse) {
+        errorMessage.error = "No hay un juego con el Codigo indicado";
+        return res.status(status.notfound).send(errorMessage);
+      }
+
+      const values = [player_one, questions_one, game_code];
+      const response = await dbQuery.query(updateGameQuery, values);
+
+      const dbResults = response.rows[0];
+      successMessage.data = dbResults;
+      return res.status(status.success).send(successMessage);
+    } catch (error) {
+      errorMessage.error = "Hubo un error en la operacion";
+      return res.status(status.error).send(errorMessage);
+    }
+  }
+
+  if (player_two) {
+    const updateGameQuery =
+      "UPDATE multi_game SET player_two=$1, questions_two=$2 WHERE game_code=$3 RETURNING*";
+
+    try {
+      const { rows } = await dbQuery.query(findGameQuery, [game_code]);
+      const dbResponse = rows[0];
+      if (!dbResponse) {
+        errorMessage.error = "No hay un juego con el Codigo indicado";
+        return res.status(status.notfound).send(errorMessage);
+      }
+
+      const values = [player_two, questions_two, game_code];
+      const response = await dbQuery.query(updateGameQuery, values);
+
+      const dbResults = response.rows[0];
+      successMessage.data = dbResults;
+      return res.status(status.success).send(successMessage);
+    } catch (error) {
+      errorMessage.error = "Hubo un error en la operacion";
+      return res.status(status.error).send(errorMessage);
+    }
+  }
 };
 
 module.exports = { createGame, getGame, updateGame };
