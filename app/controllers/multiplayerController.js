@@ -39,7 +39,7 @@ const createGame = async (req, res) => {
 };
 
 const getGame = async (req, res) => {
-  const { game_code } = req.body;
+  const { game_code } = req.params;
 
   const getGameQuery = "SELECT * FROM multi_game WHERE game_code=$1";
 
@@ -66,7 +66,7 @@ const updateGame = async (req, res) => {
     questions_one,
     player_two,
     questions_two,
-  } = req.body;
+  } = req.params;
   const findGameQuery = "SELECT * FROM multi_game WHERE game_code=$1";
   if (player_one) {
     const updateGameQuery =
