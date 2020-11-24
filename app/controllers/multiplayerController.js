@@ -39,7 +39,7 @@ const createGame = async (req, res) => {
 };
 
 const getGame = async (req, res) => {
-  const { game_code } = req.params;
+  const { game_code } = req.body;
 
   const getGameQuery = "SELECT * FROM multi_game WHERE game_code=$1";
 
@@ -55,6 +55,7 @@ const getGame = async (req, res) => {
     return res.status(status.success).send(successMessage);
   } catch (error) {
     errorMessage.error = "Hubo un error en la operacion";
+    errorMessage.data = req.body;
     return res.status(status.error).send(errorMessage);
   }
 };
@@ -66,7 +67,7 @@ const updateGame = async (req, res) => {
     questions_one,
     player_two,
     questions_two,
-  } = req.params;
+  } = req.body;
   const findGameQuery = "SELECT * FROM multi_game WHERE game_code=$1";
   if (player_one) {
     const updateGameQuery =
