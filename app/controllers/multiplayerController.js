@@ -115,6 +115,9 @@ const updateGame = async (req, res) => {
       return res.status(status.error).send(errorMessage);
     }
   }
+
+  errorMessage.error = "Hubo un error en la operacion";
+  return res.status(status.error).send(errorMessage);
 };
 
 module.exports = { createGame, getGame, updateGame };

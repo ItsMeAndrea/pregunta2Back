@@ -10,6 +10,6 @@ const router = express.Router();
 
 router.post("/multiplayer/addGame", createGame);
 router.get("/multiplayer/getGame", getGame);
-router.put("/multiplayr/updateGame", updateGame);
+router.put("/multiplayer/updateGame", updateGame);
 
 module.exports = router;
