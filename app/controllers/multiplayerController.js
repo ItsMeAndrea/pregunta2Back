@@ -120,4 +120,26 @@ const updateGame = async (req, res) => {
   return res.status(status.error).send(errorMessage);
 };
 
-module.exports = { createGame, getGame, updateGame };
+const getGameByUser = async (req, res) => {
+  const { username } = req.body;
+  const gameByUserQuery =
+    "SELECT * FROM multi_game WHERE player_one=$1 OR player_two=$1";
+
+  try {
+    const { rows } = await dbQuery.query(gameByUserQuery, [username]);
+    const dbResponse = rows;
+
+    if (!dbResponse[0]) {
+      errorMessage.error = "No hay juegos disponibles";
+      return res.status(status.notfound).send(errorMessage);
+    }
+
+    successMessage.data = dbResponse;
+    return res.status(status.success).send(successMessage);
+  } catch (error) {
+    errorMessage.error = "Hubo un error en la operacion";
+    return res.status(status.error).send(errorMessage);
+  }
+};
+
+module.exports = { createGame, getGame, updateGame, getGameByUser };
